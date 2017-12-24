@@ -49,7 +49,7 @@ for i, (x,y,w,h) in enumerate(faces):
 	#output_path = os.path.join(output_dir,'{0}.jpg'.format(i))
 	#cv2.imwrite(output_path,face_image)
 
-	IMAGE_SIZE = 160
+	IMAGE_SIZE = 224
 	model = load_model('animeface.hdf5')
 	model.summary()
 

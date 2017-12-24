@@ -18,7 +18,7 @@ else:
 
 print('input:', filename)
 
-IMAGE_SIZE = 160
+IMAGE_SIZE = 224
 input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
 
 model = load_model('animeface.hdf5')
