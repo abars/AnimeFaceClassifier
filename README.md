@@ -12,7 +12,7 @@ http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
 
 以下のコマンドでtrainフォルダとvalidationフォルダを作成します。
 
-`perl sperate.pl`
+`perl separate.pl`
 
 # 学習
 
