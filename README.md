@@ -30,6 +30,10 @@ http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
 
 # 認識
 
+lbpcascade_animeface.xmlをダウンロードし、recognize.pyと同じフォルダに置いて下さい。
+
+https://github.com/nagadomi/lbpcascade_animeface
+
 OpenCVで顔を検出した後、ラベルを表示します。
 
 `python recognize.py`
