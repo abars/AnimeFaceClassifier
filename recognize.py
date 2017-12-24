@@ -3,11 +3,15 @@
 import os
 import cv2
 import sys
+import numpy as np
+
+from keras.models import load_model
 
 if len(sys.argv) != 2:
     #print("usage: python predict.py [filename]")
     #sys.exit(1)
 	filename = "animeface-character-dataset/thumb/000_hatsune_miku/face_27_136_113.png"
+	filename = "images/25631.png"
 else:
 	filename = sys.argv[1]
 
@@ -45,9 +49,28 @@ for i, (x,y,w,h) in enumerate(faces):
 	#output_path = os.path.join(output_dir,'{0}.jpg'.format(i))
 	#cv2.imwrite(output_path,face_image)
 
+	IMAGE_SIZE = 160
+	model = load_model('animeface.hdf5')
+	model.summary()
+
+	img = cv2.resize(face_image, (IMAGE_SIZE,IMAGE_SIZE))
+	#image.load_img(filename, target_size=(IMAGE_SIZE, IMAGE_SIZE))
+	img = img#image.img_to_array(img)
+	img = np.expand_dims(img, axis=0)
+	img = img / 255.0
+
+	pred = model.predict(img)[0]
+	print(pred)
+
+	prob = np.max(pred)
+	cls = pred.argmax()
+
+	lines=open('animeface-character-dataset/tools/tag.txt').readlines()
+	print prob, cls, lines[cls]
+
 	cv2.rectangle(image, (x2,y2), (x2+w2,y2+h2), color=(0,0,255), thickness=3)
-	label="test"
-	cv2.putText(image, "Label", (x2,y2-8), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.8, (0,0,250));
+	label=lines[cls]+" "+str(prob)
+	cv2.putText(image, label, (x2,y2-8), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.8, (0,0,250));
 
 #cv2.imwrite('faces.jpg',image)
 
