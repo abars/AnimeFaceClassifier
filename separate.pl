@@ -38,7 +38,7 @@ sub check
   foreach my $file (readdir(D)) {
     if ($file =~ /\.png$/) {
       ++$png_count;
-      if($png_count%2==0){
+      if($png_count%4!=0){
         system("cp $dir/$file train/$id/$file");
       }else{
         system("cp $dir/$file validation/$id/$file");

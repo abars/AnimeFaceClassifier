@@ -17,8 +17,8 @@ N_CATEGORIES  = 203
 IMAGE_SIZE = 224
 BATCH_SIZE = 16
 
-NUM_TRAINING = 1600
-NUM_VALIDATION = 400
+NUM_TRAINING = 14490*3/4
+NUM_VALIDATION = 14490*1/4
 
 input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
 base_model = VGG16(weights='imagenet', include_top=False,input_tensor=input_tensor)
@@ -32,8 +32,8 @@ model = Model(inputs=base_model.input, outputs=predictions)
 #for layer in base_model.layers:
 #   layer.trainable = False
 
-for layer in base_model.layers[:15]:
-   layer.trainable = False
+#for layer in base_model.layers[:15]:
+#   layer.trainable = False
    
 from keras.optimizers import SGD
 model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy',metrics=['accuracy'])
