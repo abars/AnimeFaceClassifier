@@ -28,6 +28,12 @@ http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
 
 `python predict.py`
 
+# 認識
+
+OpenCVで顔を検出した後、ラベルを表示します。
+
+`python recognize.py`
+
 # 謝辞
 
 スクリプトは以下のサイトを参考にさせて頂きました。
