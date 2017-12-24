@@ -12,13 +12,13 @@ http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
 
 以下のコマンドでtrainフォルダとvalidationフォルダを作成します。
 
-'perl sperate.pl'
+`perl sperate.pl`
 
 # 学習
 
 以下のコマンドで学習します。
 
-'python train.py'
+`python train.py`
 
 学習済みモデルはanimeface.hdf5に格納されます。
 
@@ -26,7 +26,7 @@ http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
 
 以下のコマンドで推論します。
 
-'python predict.py'
+`python predict.py`
 
 # 謝辞
 
