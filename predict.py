@@ -12,13 +12,13 @@ import numpy as np
 if len(sys.argv) != 2:
     #print("usage: python predict.py [filename]")
     #sys.exit(1)
-	filename = "animeface-character-dataset/thumb/000_hatsune_miku/face_27_136_113.png"
+	filename = "animeface-character-dataset/thumb/000_hatsune_miku/face_93_104_36.png"
 else:
 	filename = sys.argv[1]
 
 print('input:', filename)
 
-IMAGE_SIZE = 224
+IMAGE_SIZE = 32
 input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
 
 model = load_model('animeface.hdf5')
@@ -30,8 +30,8 @@ x = np.expand_dims(x, axis=0)
 
 x = x / 255.0
 
-# print(x)
-# print(x.shape)
+print(x)
+print(x.shape)
 
 pred = model.predict(x)[0]
 print(pred)

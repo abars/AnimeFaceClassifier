@@ -34,9 +34,17 @@ lbpcascade_animeface.xmlをダウンロードし、recognize.pyと同じフォ�
 
 https://github.com/nagadomi/lbpcascade_animeface
 
-OpenCVで顔を検出した後、ラベルを表示します。
+OpenCVで顔を検出した後、CNNでラベルを表示します。
 
-`python recognize.py`
+`python recognize.py sample.png`
+
+# 認識精度
+
+Mac Pro 2013で2日程度で学習が完了します。
+
+32x32を入力する3段の浅いモデルで、認識精度は70%程度です。
+
+loss: 0.6173 - acc: 0.8140 - val_loss: 1.2487 - val_acc: 0.7019
 
 # 謝辞
 
