@@ -1,4 +1,4 @@
-# Anime Face Classifier
+# Anime Face Classifier using Keras
 
 Classification Japanese Anime Character.
 
@@ -7,6 +7,16 @@ Classification Japanese Anime Character.
 Hatsune Miku / Crypton Future Media inc. / CC BY-NC
 
 Detectable Character List : <https://github.com/abars/AnimeFaceClassifier/blob/master/animeface_tag.txt>
+
+# Requirements
+
+Keras2
+
+Python 2.7
+
+OpenCV3
+
+Plaidml (Train)
 
 # Pretrained model
 
