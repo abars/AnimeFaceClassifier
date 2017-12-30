@@ -2,18 +2,23 @@
 
 Classification Japanese Anime Character.
 
-![Detected](https://github.com/abars/AnimeFaceClassifier/blob/master/pretrain/result.png "Detected")
+![Miku Detected](https://github.com/abars/AnimeFaceClassifier/blob/master/pretrain/result.png "Miku Detected")
+
 Hatsune Miku / Crypton Future Media inc. / CC BY-NC
+
+Detectable Character List : <https://github.com/abars/AnimeFaceClassifier/blob/master/animeface_tag.txt>
 
 # Pretrained model
 
 Download pretrained model and rename to animeface.hdf5.
 
+<http://www.abars.biz/keras/animeface_small_cnn.hdf5> (946MB)
+
 Small CNN model. Train 2days using Mac Pro 2013.
 
 loss: 0.6173 - acc: 0.8140 - val_loss: 1.2487 - val_acc: 0.7019
 
-<http://www.abars.biz/keras/animeface_small_cnn.hdf5> (946MB)
+TBD
 
 VGG16 fine tuning model. Train 3days using Mac Pro 2013.
 
