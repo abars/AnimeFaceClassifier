@@ -69,7 +69,7 @@ for i, (x,y,w,h) in enumerate(faces):
 	prob = np.max(pred)
 	cls = pred.argmax()
 
-	lines=open('animeface-character-dataset/tools/tag.txt').readlines()
+	lines=open('animeface_tag.txt').readlines()
 	print prob, cls, lines[cls]
 
 	cv2.rectangle(target_image, (x2,y2), (x2+w2,y2+h2), color=(0,0,255), thickness=3)

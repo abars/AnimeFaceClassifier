@@ -1,54 +1,51 @@
 # Anime Face Classifier
 
-KerasとAnime Face Datasetを使用してアニメキャラ分類器を作成します。
+Classification Japanese Anime Character.
 
-# 準備
+![Detected](https://github.com/abars/AnimeFaceClassifier/blob/master/pretrain/result.png "Detected")
+Hatsune Miku / Crypton Future Media inc. / CC BY-NC
 
-animeface-character-datasetをダウンロードし、predict.pyと同じフォルダに置いて下さい。
+# Pretrained model
 
-http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
+Download pretrained model and rename to animeface.hdf5.
 
-# データセット作成
-
-以下のコマンドでtrainフォルダとvalidationフォルダを作成します。
-
-`perl separate.pl`
-
-# 学習
-
-以下のコマンドで学習します。
-
-`python train.py`
-
-学習済みモデルはanimeface.hdf5に格納されます。
-
-# 推論
-
-以下のコマンドで推論します。
-
-`python predict.py`
-
-# 認識
-
-lbpcascade_animeface.xmlをダウンロードし、recognize.pyと同じフォルダに置いて下さい。
-
-https://github.com/nagadomi/lbpcascade_animeface
-
-OpenCVで顔を検出した後、CNNでラベルを表示します。
-
-`python recognize.py sample.png`
-
-# 認識精度
-
-Mac Pro 2013で2日程度で学習が完了します。
-
-32x32を入力する3段の浅いモデルで、認識精度は70%程度です。
+Small CNN model. Train 2days using Mac Pro 2013.
 
 loss: 0.6173 - acc: 0.8140 - val_loss: 1.2487 - val_acc: 0.7019
 
-# 謝辞
+<http://www.abars.biz/keras/animeface_small_cnn.hdf5> (946MB)
 
-スクリプトは以下のサイトを参考にさせて頂きました。
+VGG16 fine tuning model. Train 3days using Mac Pro 2013.
 
-少ない画像から画像分類を学習させる方法
+# Predict
+
+Predict from face image.
+
+`python predict.py face.png`
+
+# Recognize
+
+Recognize from several image.
+
+`python recognize.py sample.png`
+
+# Download dataset
+
+Download animeface-character-dataset and put in the same folder.
+
+http://www.nurs.or.jp/~nagadomi/animeface-character-dataset/README.html
+
+Create train folder and validation folder.
+
+`perl separate.pl`
+
+# Train
+
+`python train.py`
+
+Output is animeface.hdf5.
+
+# Acknowledgement
+
+https://github.com/nagadomi/lbpcascade_animeface
 https://spjai.com/keras-fine-tuning/

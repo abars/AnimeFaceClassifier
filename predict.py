@@ -39,5 +39,5 @@ print(pred)
 prob = np.max(pred)
 cls = pred.argmax()
 
-lines=open('animeface-character-dataset/tools/tag.txt').readlines()
+lines=open('animeface_tag.txt').readlines()
 print prob, cls, lines[cls]

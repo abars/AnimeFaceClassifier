@@ -13,6 +13,7 @@ from keras.layers.core import Activation
 from keras.layers.core import Dense
 from keras.layers.core import Dropout
 from keras.layers.core import Flatten
+from keras.layers import InputLayer
 from keras.models import Sequential
 
 from keras.models import Model
@@ -27,43 +28,37 @@ BATCH_SIZE = 16
 NUM_TRAINING = 14490*3/4
 NUM_VALIDATION = 14490*1/4
 
-#IMAGE_SIZE = 224
-#input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
-#base_model = VGG16(weights='imagenet', include_top=False,input_tensor=input_tensor)
-#x = base_model.output
-#x = GlobalAveragePooling2D()(x)
-#x = Dense(1024, activation='relu')(x)
-#predictions = Dense(N_CATEGORIES, activation='softmax')(x)
-#model = Model(inputs=base_model.input, outputs=predictions)
-
-
-IMAGE_SIZE = 32
-
-model = Sequential()
-
-model.add(Convolution2D(96, 3, 3, border_mode='same', input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3)))
-model.add(Activation('relu'))
-
-model.add(Convolution2D(128, 3, 3))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-
-model.add(Flatten())
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-
-model.add(Dense(N_CATEGORIES))
-model.add(Activation('softmax'))
-
-
-
+#VOC model
+IMAGE_SIZE = 224
+input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
+base_model = VGG16(weights='imagenet', include_top=False,input_tensor=input_tensor)
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dense(1024, activation='relu')(x)
+predictions = Dense(N_CATEGORIES, activation='softmax')(x)
+model = Model(inputs=base_model.input, outputs=predictions)
 #for layer in base_model.layers:
 #   layer.trainable = False
+for layer in base_model.layers[:15]:
+   layer.trainable = False
 
-#for layer in base_model.layers[:15]:
-#   layer.trainable = False
-   
+#FC model
+#IMAGE_SIZE = 32
+#model = Sequential()
+#input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3)
+#model.add(InputLayer(input_shape=input_shape))
+#model.add(Convolution2D(96, 3, 3, border_mode='same'))
+#model.add(Activation('relu'))
+#model.add(Convolution2D(128, 3, 3))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
+#model.add(Flatten())
+#model.add(Dense(1024))
+#model.add(Activation('relu'))
+#model.add(Dropout(0.5))
+#model.add(Dense(N_CATEGORIES))
+#model.add(Activation('softmax'))
+
 #from keras.optimizers import SGD
 #model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy',metrics=['accuracy'])
 
