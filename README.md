@@ -62,7 +62,7 @@ Create train folder and validation folder.
 
 `python train.py`
 
-Output is animeface.hdf5.
+Output is train_animeface_*.hdf5.
 
 # Acknowledgement
 
