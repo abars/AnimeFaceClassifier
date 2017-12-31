@@ -8,15 +8,27 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing import image
 
+#MODEL_HDF5='animeface_vgg16.hdf5'
+MODEL_HDF5='animeface_small_cnn.hdf5'
+
 if len(sys.argv) != 2:
     #print("usage: python predict.py [filename]")
     #sys.exit(1)
-	filename = "animeface-character-dataset/thumb/000_hatsune_miku/face_27_136_113.png"
-	filename = "images/25631.png"
+	filename = "images/miku.png"
 else:
 	filename = sys.argv[1]
 
 print('input:', filename)
+
+if(MODEL_HDF5 == 'animeface_vgg16.hdf5'):
+	IMAGE_SIZE = 224
+elif(MODEL_HDF5 == 'animeface_small_cnn.hdf5'):
+	IMAGE_SIZE = 32
+else:
+	raise Exception('invalid model name')
+
+model = load_model(MODEL_HDF5)
+model.summary()
 
 classifier = cv2.CascadeClassifier('lbpcascade_animeface.xml')
 
@@ -49,10 +61,6 @@ for i, (x,y,w,h) in enumerate(faces):
 	face_image = target_image[y2:y2+h2, x2:x2+w2]
 	#output_path = os.path.join(output_dir,'{0}.jpg'.format(i))
 	#cv2.imwrite(output_path,face_image)
-
-	IMAGE_SIZE = 32
-	model = load_model('animeface.hdf5')
-	model.summary()
 
 	img = cv2.resize(face_image, (IMAGE_SIZE,IMAGE_SIZE))
 	cv2.imwrite('faces.jpg',img)

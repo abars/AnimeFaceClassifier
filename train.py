@@ -28,39 +28,44 @@ BATCH_SIZE = 16
 NUM_TRAINING = 14490*3/4
 NUM_VALIDATION = 14490*1/4
 
-#VOC model
-IMAGE_SIZE = 224
-input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
-base_model = VGG16(weights='imagenet', include_top=False,input_tensor=input_tensor)
-x = base_model.output
-x = GlobalAveragePooling2D()(x)
-x = Dense(1024, activation='relu')(x)
-predictions = Dense(N_CATEGORIES, activation='softmax')(x)
-model = Model(inputs=base_model.input, outputs=predictions)
-#for layer in base_model.layers:
-#   layer.trainable = False
-for layer in base_model.layers[:15]:
-   layer.trainable = False
+#MODEL_HDF5='train_animeface_vgg16.hdf5'
+MODEL_HDF5='train_animeface_small_cnn.hdf5'
 
-#FC model
-#IMAGE_SIZE = 32
-#model = Sequential()
-#input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3)
-#model.add(InputLayer(input_shape=input_shape))
-#model.add(Convolution2D(96, 3, 3, border_mode='same'))
-#model.add(Activation('relu'))
-#model.add(Convolution2D(128, 3, 3))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-#model.add(Flatten())
-#model.add(Dense(1024))
-#model.add(Activation('relu'))
-#model.add(Dropout(0.5))
-#model.add(Dense(N_CATEGORIES))
-#model.add(Activation('softmax'))
+#VOC model
+if(MODEL_HDF5=='train_animeface_vgg16'):
+   IMAGE_SIZE = 224
+   input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
+   base_model = VGG16(weights='imagenet', include_top=False,input_tensor=input_tensor)
+   x = base_model.output
+   x = GlobalAveragePooling2D()(x)
+   x = Dense(1024, activation='relu')(x)
+   predictions = Dense(N_CATEGORIES, activation='softmax')(x)
+   model = Model(inputs=base_model.input, outputs=predictions)
+   #for layer in base_model.layers:
+   #   layer.trainable = False
+   for layer in base_model.layers[:15]:
+      layer.trainable = False
+elif(MODEL_HDF5=='train_animeface_small_cnn.hdf5'):
+   IMAGE_SIZE = 32
+   model = Sequential()
+   input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3)
+   model.add(InputLayer(input_shape=input_shape))
+   model.add(Convolution2D(96, 3, 3, border_mode='same'))
+   model.add(Activation('relu'))
+   model.add(Convolution2D(128, 3, 3))
+   model.add(Activation('relu'))
+   model.add(Dropout(0.5))
+   model.add(Flatten())
+   model.add(Dense(1024))
+   model.add(Activation('relu'))
+   model.add(Dropout(0.5))
+   model.add(Dense(N_CATEGORIES))
+   model.add(Activation('softmax'))
+else:
+   raise Exception('invalid model name')
 
 #from keras.optimizers import SGD
-#model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy',metrics=['accuracy'])
+  #model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy',metrics=['accuracy'])
 
 from keras.optimizers import Adagrad
 model.compile(optimizer=Adagrad(lr=0.01, epsilon=1e-08, decay=0.0), loss='categorical_crossentropy',metrics=['accuracy'])
@@ -102,4 +107,4 @@ hist = model.fit_generator(train_generator,
    validation_steps=NUM_VALIDATION//BATCH_SIZE,
    )
 
-model.save('animeface.hdf5')
+model.save(MODEL_HDF5)

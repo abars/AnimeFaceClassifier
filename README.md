@@ -20,29 +20,33 @@ Plaidml (Train)
 
 # Pretrained model
 
-Download pretrained model and rename to animeface.hdf5.
+Download pretrained model.
 
-<http://www.abars.biz/keras/animeface_small_cnn.hdf5> (946MB)
+
+Recommended : <http://www.abars.biz/keras/animeface_small_cnn.hdf5> (946MB)
 
 Small CNN model. Train 2days using Mac Pro 2013.
 
 loss: 0.6173 - acc: 0.8140 - val_loss: 1.2487 - val_acc: 0.7019
 
-TBD
+
+Experimental : <http://www.abars.biz/keras/animeface_vgg16.hdf5> (93MB)
 
 VGG16 fine tuning model. Train 3days using Mac Pro 2013.
+
+loss: 0.0557 - acc: 0.9836 - val_loss: 1.0058 - val_acc: 0.8178
 
 # Predict
 
 Predict from face image.
 
-`python predict.py face.png`
+`python predict.py images/miku_face.jpg`
 
 # Recognize
 
 Recognize from several image.
 
-`python recognize.py sample.png`
+`python recognize.py images/miku.png`
 
 # Download dataset
 
