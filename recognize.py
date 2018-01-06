@@ -15,8 +15,8 @@ from keras.preprocessing import image
 MODEL_HDF5='animeface_small_cnn.hdf5'
 
 if len(sys.argv) != 2:
-    #print("usage: python predict.py [filename]")
-    #sys.exit(1)
+	#print("usage: python predict.py [filename]")
+	#sys.exit(1)
 	filename = "images/miku.png"
 else:
 	filename = sys.argv[1]
@@ -35,14 +35,11 @@ model.summary()
 
 classifier = cv2.CascadeClassifier('lbpcascade_animeface.xml')
 
-target_image = cv2.imread(filename)
+target_image = cv2.imread(filename)	#BGR
 
 gray_image = cv2.cvtColor(target_image,cv2.COLOR_BGR2GRAY)
 
 faces = classifier.detectMultiScale(gray_image)
-#output_dir = 'faces'
-#if not os.path.exists(output_dir):
-#    os.makedirs(output_dir)
 
 for i, (x,y,w,h) in enumerate(faces):
 	margin=w/4
@@ -62,14 +59,8 @@ for i, (x,y,w,h) in enumerate(faces):
 		h2=target_image.shape[1]-1
 
 	face_image = target_image[y2:y2+h2, x2:x2+w2]
-	#output_path = os.path.join(output_dir,'{0}.jpg'.format(i))
-	#cv2.imwrite(output_path,face_image)
-
 	img = cv2.resize(face_image, (IMAGE_SIZE,IMAGE_SIZE))
-	cv2.imwrite('faces.jpg',img)
-
-	img=image.load_img('faces.jpg', target_size=(IMAGE_SIZE, IMAGE_SIZE))
-	img=image.img_to_array(img)
+	img = img[::-1, :, ::-1].copy()	#BGR to RGB
 
 	img = np.expand_dims(img, axis=0)
 	img = img / 255.0
