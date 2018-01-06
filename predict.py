@@ -37,7 +37,7 @@ input_tensor = Input(shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
 model = load_model(MODEL_HDF5)
 model.summary()
 
-img = image.load_img(filename, target_size=(IMAGE_SIZE, IMAGE_SIZE))
+img = image.load_img(filename, target_size=(IMAGE_SIZE, IMAGE_SIZE))	#RGB
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
 
