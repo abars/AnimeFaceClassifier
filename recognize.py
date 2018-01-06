@@ -5,6 +5,9 @@ import cv2
 import sys
 import numpy as np
 
+import plaidml.keras
+plaidml.keras.install_backend()
+
 from keras.models import load_model
 from keras.preprocessing import image
 

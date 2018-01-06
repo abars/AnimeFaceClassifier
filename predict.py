@@ -2,6 +2,10 @@
 
 import os
 import sys
+
+import plaidml.keras
+plaidml.keras.install_backend()
+
 from keras.applications.vgg16 import VGG16
 from keras.models import Sequential, Model
 from keras.layers import Input, Activation, Dropout, Flatten, Dense, GlobalAveragePooling2D
